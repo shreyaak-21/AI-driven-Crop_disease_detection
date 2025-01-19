@@ -1,5 +1,7 @@
-keras==3.4.1
-numpy==1.21.2
+streamlit==1.25.0
+tensorflow==2.14.0
+keras==2.14.0
 numpy==1.24.3
-opencv_python==4.5.3.56
-streamlit==1.36.0
+opencv-python==4.8.0.76
+pandas==1.5.3
+
