@@ -3,9 +3,20 @@ import streamlit as st
 import cv2
 from keras.models import load_model
 import base64
+import requests
+import os
 
 st.markdown('<h1 class="title">CROPCURE AI - Detect Early, Protect Always</h1>', unsafe_allow_html=True)
 
+model_url = "https://drive.google.com/file/d/1M5okzL1Sb1H-WAEwWhcyOfG0xv3f-SJs/view?usp=sharing"  # Replace with your model's URL
+model_path = "plant_disease.h5"
+
+if not os.path.exists(model_path):
+    print("Downloading model...")
+    r = requests.get(model_url)
+    with open(model_path, 'wb') as f:
+        f.write(r.content)
+model = load_model(model_path)
 
 # ✅ Encode Image to Base64 for Background
 def get_base64_of_bin_file(bin_file):
@@ -18,7 +29,7 @@ def get_base64_of_bin_file(bin_file):
         return None
 
 # ✅ Background Image Path
-background_image_path = "C:/Users/hp/Downloads/Plant_Disease/male-farmer-with-beard-check-tea-farm_1150-14747.jpg"
+background_image_path = "male-farmer-with-beard-check-tea-farm_1150-14747.jpg"
 background_image_base64 = get_base64_of_bin_file(background_image_path)
 
 # ✅ Custom CSS for Styling
@@ -81,7 +92,7 @@ if background_image_base64:
     )
 
 # ✅ Load the Model
-model_path = "C:/Users/hp/Downloads/Plant_Disease/plant_disease.h5"
+model_path ="plant_disease.h5"
 model = load_model(model_path)
 
 # ✅ Class Names and Disease Management Dictionary
